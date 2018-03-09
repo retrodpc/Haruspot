@@ -24,7 +24,7 @@ bot = Cinch::Bot.new do
     end
   end
 
-  on :message, /^(<.*> )*^[Oo][Kk].*/ do |m|
+  on :message, /^(<.*> )*[Oo][Kk].*/ do |m|
     m.reply "Oh, okay, #{m.user.nick}."
   end
 end
