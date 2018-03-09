@@ -5,11 +5,6 @@ class Cinch::Harucore
 
   match /ping/, :method => :on_ping, :react_on => :channel
 
-  set :help, <<-HELP
-cinch ping <text>
-  Replies with "Pong!".
-  HELP
-
   def on_ping(m)
     m.reply("Pong!")
   end
