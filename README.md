@@ -1,2 +1,2 @@
 # Haruspot
-an irc bot for badposting
+An IRC bot for badposting
