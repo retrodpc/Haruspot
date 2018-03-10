@@ -58,9 +58,9 @@ class Cinch::Harucore
   
   listen_to :channel, :method => :on_channel
 
-  match /ping/, :method => :on_ping, :react_on => :channel
-  match /violin/, :method => :on_violin, :react_on => :channel
-  match /aaa/, :method => :on_aaa, :react_on => :channel
+  match /ping/, :method => :on_ping, :react_on => [:channel, :private]
+  match /violin/, :method => :on_violin, :react_on => [:channel, :private]
+  match /aaa/, :method => :on_aaa, :react_on => [:channel, :private]
 
   set :help, <<-HELP
 [prefix]ping
