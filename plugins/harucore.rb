@@ -100,7 +100,7 @@ class Cinch::Harucore
     return unless shiptoast?(msg)
     if msg.message =~ /^ok/i
       msg.safe_reply 'Oh, okay.'
-    if msg.message =~ /^オー?ケー?/i
+    elsif msg.message =~ /^オー?ケー?/i
       msg.safe_reply 'wtf ウィーアブーだよ？？？'
     elsif msg.message =~ /case in point/i
       msg.safe_reply 'point in case'
