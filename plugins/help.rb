@@ -119,10 +119,10 @@ class Cinch::Help
 
     # Act depending on the subcommand.
     if query.empty?
-      response << @intro_message.strip << '\n'
-      response << 'Available plugins:\n'
+      response << @intro_message.strip << "\n"
+      response << "Available plugins:\n"
       response << bot.config.plugins.plugins.map{|plugin| format_plugin_name(plugin)}.join(', ')
-      response << '\n"help <plugin>" for help on a specific plugin.'
+      response << "\n\"help <plugin>\" for help on a specific plugin."
 
     # Help for a specific plugin
     elsif plugin = @help.keys.find{|plugin| format_plugin_name(plugin) == query}
@@ -189,9 +189,9 @@ class Cinch::Help
   def format_command(command, explanation, plugin)
     result = ''
 
-    result << '┌─ ' << command << ' ─── Plugin: ' << format_plugin_name(plugin) << ' ─' << '\n'
-    result << explanation.lines.map(&:strip).join(' ').chars.each_slice(80).map(&:join).join('\n')
-    result << '\n' << '└ ─ ─ ─ ─ ─ ─ ─ ─\n'
+    result << '┌─ ' << command << ' ─── Plugin: ' << format_plugin_name(plugin) << ' ─' << "\n"
+    result << explanation.lines.map(&:strip).join(' ').chars.each_slice(80).map(&:join).join("\n")
+    result << "\n" << "└ ─ ─ ─ ─ ─ ─ ─ ─\n"
 
     result
   end
