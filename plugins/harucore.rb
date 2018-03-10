@@ -61,7 +61,7 @@ class Cinch::Harucore
   # def zalgo_gen(text)
   # end
   
-  listen_to :message, :method => :on_message
+  listen_to :message, method: :on_message
 
   match(/ping/, :method => :on_ping)
   match(/violin/, :method => :on_violin)
