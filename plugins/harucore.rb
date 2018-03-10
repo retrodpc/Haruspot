@@ -16,7 +16,7 @@ cinch echo <text>
   
   def on_channel(m)
     if m.message =~ /^[Oo][Kk]/
-      m.reply "Oh, okay, #{m.user.nick}."
+      m.reply "Oh, okay."
     end
   end
 
