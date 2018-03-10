@@ -36,9 +36,9 @@
 class Cinch::Harutils
   include Cinch::Plugin
 
-  match /amkspeed ?(.*)/, :method => :on_amkspeed, :react_on => :channel
-  match /clockspeed ?(.*) (.*)/, :method => :on_clockspeed, :react_on => :channel
-  match /tickspeed ?(.*) (.*)/, :method => :on_tickspeed, :react_on => :channel
+  match /amkspeed ?(.*)/, :method => :on_amkspeed
+  match /clockspeed ?(.*) (.*)/, :method => :on_clockspeed
+  match /tickspeed ?(.*) (.*)/, :method => :on_tickspeed
 
   set :help, <<-HELP
 [prefix]amkspeed <tempo>
@@ -52,15 +52,15 @@ class Cinch::Harutils
   def on_amkspeed(m, tempo)
     tempo = Float(tempo) rescue nil
     if tempo.nil?
-      m.reply("Usage: #{bot.config.plugins.prefix}amkspeed <tempo>")
+      m.safe_reply("Usage: #{bot.config.plugins.prefix}amkspeed <tempo>")
     elsif tempo < 0
-      m.reply("Sorry, #{m.user.nick}, you can't have a tempo less than 0.")
+      m.safe_reply("Sorry, #{m.user.nick}, you can't have a tempo less than 0.")
     else
       amkspeed = tempo * 256.0 / 625.0
       if (amkspeed.round) == amkspeed
-        m.reply("Given tempo #{tempo}, the AMK speed is %d." % [amkspeed])
+        m.safe_reply("Given tempo #{tempo}, the AMK speed is %d." % [amkspeed])
       else
-        m.reply("The AMK speed is about %d. The yielded tempo would be %.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0])
+        m.safe_reply("The AMK speed is about %d. The yielded tempo would be %.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0])
       end
     end
   end
@@ -69,12 +69,12 @@ class Cinch::Harutils
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
     if tempo.nil? || speed.nil?
-      m.reply("Usage: #{bot.config.plugins.prefix}clockspeed <tempo> <speed>")
+      m.safe_reply("Usage: #{bot.config.plugins.prefix}clockspeed <tempo> <speed>")
     elsif (tempo < 0) || (speed < 0)
-      m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
+      m.safe_reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
       clockspeed = tempo * speed / 15.0
-      m.reply("The clock speed is #{clockspeed} Hz.")
+      m.safe_reply("The clock speed is #{clockspeed} Hz.")
     end
   end
 
@@ -82,12 +82,12 @@ class Cinch::Harutils
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
     if tempo.nil? || clock.nil?
-      m.reply("Usage: #{bot.config.plugins.prefix}tickspeed <tempo> <clock>")
+      m.safe_reply("Usage: #{bot.config.plugins.prefix}tickspeed <tempo> <clock>")
     elsif (tempo < 0) || (clock < 0)
-      m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
+      m.safe_reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
       tickspeed = tempo * clock / 15.0
-      m.reply("The tick speed is #{tickspeed}.")
+      m.safe_reply("The tick speed is #{tickspeed}.")
     end
   end
 end
