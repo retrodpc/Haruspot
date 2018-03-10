@@ -3,7 +3,7 @@ class Cinch::Harutils
   
   #listen_to :channel, :method => :on_channel
 
-  match /amkspeed (*.)/, :method => :on_amkspeed, :react_on => :channel
+  match /amkspeed (.*)/, :method => :on_amkspeed, :react_on => :channel
 
   set :help, <<-HELP
 cinch amkspeed <tempo>
