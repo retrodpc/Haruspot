@@ -1,5 +1,59 @@
+# -*- coding: utf-8 -*-
+#
+# = Cinch funposting plugin
+# This plugin adds a bunch of funposting commands.
+#
+# == Commands
+# (to be added later)
+#
+# == Dependencies
+# None.
+#
+# == Configuration
+# Add the following to your bot’s configure.do stanza:
+#
+#   config.plugins.options[Cinch::Harucore] = {
+#     :shiptoast => ["#channel"]
+#   }
+#
+# [channel]
+#   List of channels to listen for shiptoast commands.
+#
+# == Author
+# retrodpc (Ivysalt)
+#
+# == License
+# Copyright © 2018 Ivysalt
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Funpost plugin for Cinch.
+
 class Cinch::Harucore
   include Cinch::Plugin
+
+  def is_shiptoast?(m)
+    if config[:shiptoast]
+      shiptoast = config[:shiptoast]
+    else
+      shiptoast = ["#worms_badposting"]
+    end
+    if (shiptoast.include? m.channel.name)
+      return True
+    else
+      return False
+    end
   
   listen_to :channel, :method => :on_channel
 
@@ -21,11 +75,15 @@ class Cinch::Harucore
   end
   
   def on_violin(m)
-    m.reply("The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years")
+    if is_shiptoast? m
+      m.reply("The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years")
+    end
   end
 
   def on_aaa(m)
-    m.reply("https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png")
+    if is_shiptoast? m
+      m.reply("https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png")
+    end
   end
 
   def on_channel(m)
