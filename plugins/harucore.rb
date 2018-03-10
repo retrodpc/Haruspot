@@ -54,6 +54,7 @@ class Cinch::Harucore
     else
       return False
     end
+  end
   
   listen_to :channel, :method => :on_channel
 
