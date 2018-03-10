@@ -148,7 +148,7 @@ class Cinch::Help
     end
 
     response << "Sorry, nothing found." if response.empty?
-    msg.user.msg(response)
+    msg.user.notice(response)
   end
 
   # Called on startup. This method iterates the list of registered plugins
