@@ -47,14 +47,18 @@ class Cinch::Harucore
   # copypastas = JSON.parse(File.read('../data/copypasta.json'))
 
   # Checks if the given message is in a context approprate for shiptoasting.
-  def shiptoast?(m)
+  def shiptoast?(msg)
     shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
-    if !m.channel? || (shiptoast.include? m.channel.name)
-      return true
-    else
-      return false
     end
-end
+    return (!msg.channel? || (shiptoast.include? msg.channel.name))
+  end
+
+  # Checks if the given message is not in a context approprate for shiptoasting.
+  def not_shiptoast?(msg)
+    shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
+    end
+    return !(shiptoast.include? msg.channel.name)
+  end
 
   # def zalgo_gen(text)
   # end
@@ -75,29 +79,29 @@ end
   HELP
 
   def on_ping(msg)
-    msg.safe_reply 'Pong!'
+    msg.safe_reply('Pong!')
   end
   
   def on_violin(msg)
-    if shiptoast? m
-      msg.safe_reply 'The violin (violin) is a kind of a super clean orchestra'\
+    if shiptoast?(msg)
+      msg.safe_reply('The violin (violin) is a kind of a super clean orchestra'\
         ' played to ring carry instruments. It is widely spread all over the '\
         'world, is the modern orchestra string of the main instrument. In the '\
         'music it plays very important position, is the pillar of the modern '\
         'symphony orchestra, but also has the difficult playing skills solo '\
-        'instrument.The emergence of modern violin has been 300 years'
+        'instrument.The emergence of modern violin has been 300 years')
     end
   end
 
   def on_aaa(msg)
-    if shiptoast? m
-      msg.safe_reply 'https://cdn.discordapp.com/attachments'\
-        '/190191670304833536/201368263203094528/10a.png'
+    if shiptoast?(msg)
+      msg.safe_reply('https://cdn.discordapp.com/attachments'\
+        '/190191670304833536/201368263203094528/10a.png')
     end
   end
 
   def on_message(msg)
-    if shiptoast? m
+    if shiptoast?(msg)
       if msg.message =~ /^ok/i
         msg.safe_reply 'Oh, okay.'
       elsif msg.message =~ /case in point/i
