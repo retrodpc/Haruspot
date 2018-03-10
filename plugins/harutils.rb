@@ -3,7 +3,7 @@
 # = Cinch calculation utilities plugin
 # This plugin adds a bunch of calculation commands,
 # mostly pertinent to chiptune.
-# 
+#
 # == Commands
 # (to be added later)
 #
@@ -36,9 +36,9 @@
 class Cinch::Harutils
   include Cinch::Plugin
 
-  match /amkspeed ?(.*)/, :method => :on_amkspeed
-  match /clockspeed ?(.*) (.*)/, :method => :on_clockspeed
-  match /tickspeed ?(.*) (.*)/, :method => :on_tickspeed
+  match(/amkspeed ?(.*)/, method: :on_amkspeed)
+  match(/clockspeed ?(.*) (.*)/, method: :on_clockspeed)
+  match(/tickspeed ?(.*) (.*)/, method: :on_tickspeed)
 
   set :help, <<-HELP
 [prefix]amkspeed <tempo>
@@ -55,15 +55,16 @@ class Cinch::Harutils
       msg.safe_reply("Usage: #{bot.config.plugins.prefix}amkspeed <tempo>")
     elsif tempo < 0
       msg.safe_reply("Sorry, #{msg.user.nick}, "\
-        "I won't let you go slower than me.")
+        'I won\'t let you go slower than me.')
     else
       amkspeed = tempo * 256.0 / 625.0
       if (amkspeed.round) == amkspeed
-        msg.safe_reply("Given tempo #{tempo}, the AMK speed is %d." %
+        msg.safe_reply("Given tempo #{tempo}, the AMK speed is %<speed>d." %
             [amkspeed])
       else
-        msg.safe_reply("The AMK speed is about %d. The yielded tempo would be "\
-          "%.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0])
+        msg.safe_reply("The AMK speed is about %<speed>d. The yielded tempo "\
+          "would be %.3<tempo>f BPM." % [amkspeed,
+          amkspeed.round * 625.0 / 256.0])
       end
     end
   end

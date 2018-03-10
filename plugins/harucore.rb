@@ -63,9 +63,9 @@ class Cinch::Harucore
   
   listen_to :message, method: :on_message
 
-  match(/ping/, :method => :on_ping)
-  match(/violin/, :method => :on_violin)
-  match(/aaa/, :method => :on_aaa)
+  match(/ping/, method: :on_ping)
+  match(/violin/, method: :on_violin)
+  match(/aaa/, method: :on_aaa)
 
   set :help, <<-HELP
 [prefix]ping
