@@ -47,24 +47,14 @@ class Cinch::Harucore
   # copypastas = JSON.parse(File.read('../data/copypasta.json'))
 
   # Checks if the given message is in a context approprate for shiptoasting.
-  def shiptoast?(msg)
-    if config[:shiptoast]
-      shiptoast = config[:shiptoast]
+  def shiptoast?(m)
+    shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
+    if !m.channel? || (shiptoast.include? m.channel.name)
+      return true
     else
-      shiptoast = ['#worms_badposting']
+      return false
     end
-    return (!msg.channel? || (shiptoast.include? msg.channel.name))
-  end
-
-  # Checks if the given message is not in a context approprate for shiptoasting.
-  def not_shiptoast?(msg)
-    if config[:shiptoast]
-      shiptoast = config[:shiptoast]
-    else
-      shiptoast = ['#worms_badposting']
-    end
-    return !(shiptoast.include? msg.channel.name)
-  end
+end
 
   # def zalgo_gen(text)
   # end
