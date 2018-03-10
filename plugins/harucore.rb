@@ -8,11 +8,11 @@ class Cinch::Harucore
   match /aaa/, :method => :on_aaa, :react_on => :channel
 
   set :help, <<-HELP
-prefixping
+[prefix]ping
   Replies with "Pong!"
-prefixviolin
+[prefix]violin
   Ever wondered what a violin is? Well now find out!
-prefixaaa
+[prefix]aaa
   For when you just can't contain the pain within.
   HELP
 

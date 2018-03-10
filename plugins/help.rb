@@ -177,7 +177,7 @@ class Cinch::Help
         if line =~ /^\s+/
           @help[plugin][current_command] << line.strip
         else
-          current_command = line.strip.gsub(/cinch/i, bot.name).gsub(/prefix/i, bot.config.plugins.prefix)
+          current_command = line.strip.gsub(/cinch/i, bot.name).gsub(/\[prefix\]/i, bot.config.plugins.prefix)
         end
       end
     end
