@@ -53,7 +53,7 @@ class Cinch::Harucore
     else
       shiptoast = ['#worms_badposting']
     end
-    return !msg.channel? || (shiptoast.include? msg.channel.name)
+    return (!msg.channel? || (shiptoast.include? msg.channel.name))
   end
 
   # Checks if the given message is not in a context approprate for shiptoasting.
