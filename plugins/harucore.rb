@@ -44,7 +44,7 @@ require 'json'
 class Cinch::Harucore
   include Cinch::Plugin
 
-  #data = JSON.parse(File.read('../data/copypasta.json'))
+  # copypastas = JSON.parse(File.read('../data/copypasta.json'))
 
   # Checks if the given message is in a context approprate for shiptoasting.
   def shiptoast?(msg)
@@ -66,8 +66,8 @@ class Cinch::Harucore
     return !(shiptoast.include? msg.channel.name)
   end
 
-  #def zalgo_gen(text)
-  #end
+  # def zalgo_gen(text)
+  # end
   
   listen_to :message, :method => :on_message
 
@@ -90,13 +90,19 @@ class Cinch::Harucore
   
   def on_violin(msg)
     if shiptoast? m
-      msg.safe_reply 'The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years'
+      msg.safe_reply 'The violin (violin) is a kind of a super clean orchestra'\
+        ' played to ring carry instruments. It is widely spread all over the '\
+        'world, is the modern orchestra string of the main instrument. In the '\
+        'music it plays very important position, is the pillar of the modern '\
+        'symphony orchestra, but also has the difficult playing skills solo '\
+        'instrument.The emergence of modern violin has been 300 years'
     end
   end
 
   def on_aaa(msg)
     if shiptoast? m
-      msg.safe_reply 'https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png'
+      msg.safe_reply 'https://cdn.discordapp.com/attachments'\
+        '/190191670304833536/201368263203094528/10a.png'
     end
   end
 

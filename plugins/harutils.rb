@@ -54,13 +54,15 @@ class Cinch::Harutils
     if tempo.nil?
       msg.safe_reply "Usage: #{bot.config.plugins.prefix}amkspeed <tempo>"
     elsif tempo < 0
-      msg.safe_reply "Sorry, #{msg.user.nick}, you can't have a tempo less than 0."
+      msg.safe_reply "Sorry, #{msg.user.nick}, "\
+        "I won't let you go slower than me."
     else
       amkspeed = tempo * 256.0 / 625.0
       if (amkspeed.round) == amkspeed
         msg.safe_reply "Given tempo #{tempo}, the AMK speed is %d." % [amkspeed]
       else
-        msg.safe_reply "The AMK speed is about %d. The yielded tempo would be %.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0]
+        msg.safe_reply "The AMK speed is about %d. The yielded tempo would be "\
+          "%.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0]
       end
     end
   end
@@ -69,9 +71,11 @@ class Cinch::Harutils
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
     if tempo.nil? || speed.nil?
-      msg.safe_reply "Usage: #{bot.config.plugins.prefix}clockspeed <tempo> <speed>"
+      msg.safe_reply "Usage: #{bot.config.plugins.prefix}clockspeed"\
+        "<tempo> <speed>"
     elsif (tempo < 0) || (speed < 0)
-      msg.safe_reply "Sorry, #{msg.user.nick}, you can't make time go backwards."
+      msg.safe_reply "Sorry, #{msg.user.nick}, "\
+        "you can't make time go backwards."
     else
       clockspeed = tempo * speed / 15.0
       msg.safe_reply "The clock speed is #{clockspeed} Hz."
@@ -82,9 +86,11 @@ class Cinch::Harutils
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
     if tempo.nil? || clock.nil?
-      msg.safe_reply "Usage: #{bot.config.plugins.prefix}tickspeed <tempo> <clock>"
+      msg.safe_reply "Usage: #{bot.config.plugins.prefix}tickspeed"\
+        "<tempo> <clock>"
     elsif (tempo < 0) || (clock < 0)
-      msg.safe_reply "Sorry, #{msg.user.nick}, you can't make time go backwards."
+      msg.safe_reply "Sorry, #{msg.user.nick}, "\
+        "you can't make time go backwards."
     else
       tickspeed = tempo * clock / 15.0
       msg.safe_reply "The tick speed is #{tickspeed}."
