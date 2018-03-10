@@ -17,9 +17,9 @@ cinch amkspeed <tempo>
     else
       amkspeed = tempo * 256 / 625
       if (amkspeed % 1) == amkspeed
-        m.reply("#{m.user.nick}: the AMK speed is %.0d." % [amkspeed])
+        m.reply("#{m.user.nick}: Given tempo #{tempo}, the AMK speed is %.0d." % [amkspeed])
       else
-        m.reply("#{m.user.nick}: the AMK speed is about %.0d. The yielded tempo would be %d" % [amkspeed, (amkspeed * 625 / 256).round])
+        m.reply("#{m.user.nick}: the AMK speed is about %.0d. The yielded tempo would be %.3d BPM." % [amkspeed, (amkspeed * 625 / 256).round])
       end
     end
   end
