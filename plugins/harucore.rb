@@ -81,34 +81,31 @@ class Cinch::Harucore
   end
   
   def on_violin(msg)
-    if shiptoast?(msg)
-      msg.safe_reply('The violin (violin) is a kind of a super clean orchestra'\
-        ' played to ring carry instruments. It is widely spread all over the '\
-        'world, is the modern orchestra string of the main instrument. In the '\
-        'music it plays very important position, is the pillar of the modern '\
-        'symphony orchestra, but also has the difficult playing skills solo '\
-        'instrument.The emergence of modern violin has been 300 years')
-    end
+    return if !shiptoast?(msg)
+    msg.safe_reply('The violin (violin) is a kind of a super clean orchestra'\
+      ' played to ring carry instruments. It is widely spread all over the '\
+      'world, is the modern orchestra string of the main instrument. In the '\
+      'music it plays very important position, is the pillar of the modern '\
+      'symphony orchestra, but also has the difficult playing skills solo '\
+      'instrument.The emergence of modern violin has been 300 years')
   end
 
   def on_aaa(msg)
-    if shiptoast?(msg)
-      msg.safe_reply('https://cdn.discordapp.com/attachments'\
-        '/190191670304833536/201368263203094528/10a.png')
-    end
+    return if !shiptoast?(msg)
+    msg.safe_reply('https://cdn.discordapp.com/attachments'\
+      '/190191670304833536/201368263203094528/10a.png')
   end
 
   def on_message(msg)
-    if shiptoast?(msg)
-      if msg.message =~ /^ok/i
-        msg.safe_reply 'Oh, okay.'
-      elsif msg.message =~ /case in point/i
-        msg.safe_reply 'point in case'
-      elsif msg.message =~ /noticable/i
-        msg.safe_reply 'notiwire >:C'
-      elsif msg.message =~ /staph/i
-        msg.safe_reply 'ylcoccus'
-      end
+    return if !shiptoast?(msg)
+    if msg.message =~ /^ok/i
+      msg.safe_reply 'Oh, okay.'
+    elsif msg.message =~ /case in point/i
+      msg.safe_reply 'point in case'
+    elsif msg.message =~ /noticable/i
+      msg.safe_reply 'notiwire >:C'
+    elsif msg.message =~ /staph/i
+      msg.safe_reply 'ylcoccus'
     end
   end
 
