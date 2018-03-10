@@ -1,8 +1,8 @@
 class Cinch::Harutils
   include Cinch::Plugin
 
-  match /amkspeed (\d*)/, :method => :on_amkspeed, :react_on => :channel
-  match /clockspeed (\d*) (\d*)/, :method => :on_clockspeed, :react_on => :channel
+  match /amkspeed *(\d*)/, :method => :on_amkspeed, :react_on => :channel
+  match /clockspeed *(\d*) (\d*)/, :method => :on_clockspeed, :react_on => :channel
 
   set :help, <<-HELP
 cinch amkspeed <tempo>
