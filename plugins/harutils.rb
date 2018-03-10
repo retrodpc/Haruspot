@@ -1,16 +1,16 @@
 class Cinch::Harutils
   include Cinch::Plugin
 
-  match /amkspeed ?(\d*)/, :method => :on_amkspeed, :react_on => :channel
-  match /clockspeed ?(\d*) (\d*)/, :method => :on_clockspeed, :react_on => :channel
-  match /tickspeed ?(\d*) (\d*)/, :method => :on_tickspeed, :react_on => :channel
+  match /amkspeed ?(.*)&/, :method => :on_amkspeed, :react_on => :channel
+  match /clockspeed ?(.*) (.*)&/, :method => :on_clockspeed, :react_on => :channel
+  match /tickspeed ?(.*) (.*)&/, :method => :on_tickspeed, :react_on => :channel
 
   set :help, <<-HELP
-cinch amkspeed <tempo>
+prefix amkspeed <tempo>
   Calculates AMK speed value based on tempo in BPM.
-cinch clockspeed <tempo> <speed>
+prefix clockspeed <tempo> <speed>
   Calculates clock rate, given tempo in BPM and speed in ticks per row/unit.
-cinch tickspeed <tempo> <clock>
+prefix tickspeed <tempo> <clock>
   Calculates tick speed, given tempo in BPM and clock rate in Hz.
   HELP
 

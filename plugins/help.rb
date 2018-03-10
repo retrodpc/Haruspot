@@ -76,11 +76,11 @@
 # the actual nickname of your bot.
 #
 # == Author
-# Marvin Gülker (Quintus)
+# Marvin Gülker (Quintus), retrodpc (Ivysalt)
 #
 # == License
 # A help plugin for Cinch.
-# Copyright © 2012 Marvin Gülker
+# Copyright © 2012 Marvin Gülker, © 2018 Ivysalt
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -177,7 +177,7 @@ class Cinch::Help
         if line =~ /^\s+/
           @help[plugin][current_command] << line.strip
         else
-          current_command = line.strip.gsub(/cinch/i, bot.name)
+          current_command = line.strip.gsub(/cinch/i, bot.name).gsub(/prefix/i, bot.config.plugins.prefix)
         end
       end
     end
