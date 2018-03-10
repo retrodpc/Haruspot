@@ -72,31 +72,31 @@ class Cinch::Harucore
   HELP
 
   def on_ping(m)
-    m.reply("Pong!")
+    m.safe_reply "Pong!"
   end
   
   def on_violin(m)
     if is_shiptoast? m
-      m.reply("The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years")
+      m.safe_reply "The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years"
     end
   end
 
   def on_aaa(m)
     if is_shiptoast? m
-      m.reply("https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png")
+      m.safe_reply "https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png"
     end
   end
 
   def on_message(m)
     if is_shiptoast? m
       if m.message =~ /^ok/i
-        m.reply "Oh, okay."
+        m.safe_reply "Oh, okay."
       elsif m.message =~ /case in point/i
-        m.reply "point in case"
+        m.safe_reply "point in case"
       elsif m.message =~ /noticable/i
-        m.reply "notiwire >:C"
+        m.safe_reply "notiwire >:C"
       elsif m.message =~ /staph/i
-        m.reply "ylcoccus"
+        m.safe_reply "ylcoccus"
       end
     end
   end
