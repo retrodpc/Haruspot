@@ -1,7 +1,5 @@
 class Cinch::Harutils
   include Cinch::Plugin
-  
-  #listen_to :channel, :method => :on_channel
 
   match /amkspeed (.*)/, :method => :on_amkspeed, :react_on => :channel
 
@@ -23,8 +21,5 @@ cinch amkspeed <tempo>
       end
     end
   end
-  
-  #def on_channel(m)
-  #end
 
 end
