@@ -17,7 +17,7 @@ cinch tickspeed <tempo> <clock>
   def on_amkspeed(m, tempo)
     tempo = Float(tempo) rescue nil
     if tempo.nil?
-      m.reply("Usage: #{bot.plugins.prefix}amkspeed <tempo>")
+      m.reply("Usage: #{bot.config.plugins.prefix}amkspeed <tempo>")
     elsif tempo < 0
       m.reply("Sorry, #{m.user.nick}, you can't have a tempo less than 0.")
     else
@@ -34,7 +34,7 @@ cinch tickspeed <tempo> <clock>
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
     if tempo.nil? || speed.nil?
-      m.reply("Usage: #{bot.plugins.prefix}clockspeed <tempo> <speed>")
+      m.reply("Usage: #{bot.config.plugins.prefix}clockspeed <tempo> <speed>")
     elsif (tempo < 0) || (speed < 0)
       m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
@@ -47,7 +47,7 @@ cinch tickspeed <tempo> <clock>
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
     if tempo.nil? || clock.nil?
-      m.reply("Usage: #{bot.plugins.prefix}tickspeed <tempo> <clock>")
+      m.reply("Usage: #{bot.config.plugins.prefix}tickspeed <tempo> <clock>")
     elsif (tempo < 0) || (clock < 0)
       m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
