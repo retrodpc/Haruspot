@@ -98,7 +98,7 @@ class Cinch::Harucore
       elsif m.message =~ /staph/i
         m.reply "ylcoccus"
       end
-    else
+    end
   end
 
 end
