@@ -49,14 +49,12 @@ class Cinch::Harucore
   # Checks if the given message is in a context approprate for shiptoasting.
   def shiptoast?(msg)
     shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
-    end
     return (!msg.channel? || (shiptoast.include? msg.channel.name))
   end
 
   # Checks if the given message is not in a context approprate for shiptoasting.
   def not_shiptoast?(msg)
     shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
-    end
     return !(shiptoast.include? msg.channel.name)
   end
 
