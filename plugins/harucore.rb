@@ -15,8 +15,14 @@ cinch ping
   end
   
   def on_channel(m)
-    if m.message =~ /^[Oo][Kk]/
+    if m.message =~ /^ok/i
       m.reply "Oh, okay."
+    elsif m.message =~ /case in point/i
+      m.reply "\uD83D\uDC49\uD83D\uDCBC point in case"
+    elsif m.message =~ /noticable/i
+      m.reply "notiwire >:C"
+    elsif m.message =~ /staph/i
+      m.reply "ylcoccus"
     end
   end
 
