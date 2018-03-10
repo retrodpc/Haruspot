@@ -1,8 +1,8 @@
 class Cinch::Harutils
   include Cinch::Plugin
 
-  match /amkspeed (\d+)/, :method => :on_amkspeed, :react_on => :channel
-  match /clockspeed (\d+) (\d+)/, :method => :on_clockspeed, :react_on => :channel
+  match /amkspeed (\d*)/, :method => :on_amkspeed, :react_on => :channel
+  match /clockspeed (\d*) (\d*)/, :method => :on_clockspeed, :react_on => :channel
 
   set :help, <<-HELP
 cinch amkspeed <tempo>
@@ -16,7 +16,7 @@ cinch tickspeed <tempo> <clock>
   def on_amkspeed(m, tempo)
     tempo = Float(tempo) rescue nil
     if tempo.nil?
-      m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
+      m.reply("Usage: #{bot.plugins.prefix}amkspeed <tempo>")
     elsif tempo < 0
       m.reply("Sorry, #{m.user.nick}, you can't have a tempo less than 0.")
     else
@@ -33,7 +33,7 @@ cinch tickspeed <tempo> <clock>
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
     if tempo.nil? || speed.nil?
-      m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
+      m.reply("Usage: #{bot.plugins.prefix}clockspeed <tempo> <speed>")
     elsif (tempo < 0) || (speed < 0)
       m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
@@ -46,7 +46,7 @@ cinch tickspeed <tempo> <clock>
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
     if tempo.nil? || clock.nil?
-      m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
+      m.reply("Usage: #{bot.plugins.prefix}tickspeed <tempo> <clock>")
     elsif (tempo < 0) || (clock < 0)
       m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
