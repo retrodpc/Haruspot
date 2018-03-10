@@ -7,8 +7,10 @@ class Cinch::Harutils
   set :help, <<-HELP
 cinch amkspeed <tempo>
   Calculates AMK speed value based on tempo in BPM.
-cinch clockspeed <tempo>
+cinch clockspeed <tempo> <speed>
   Calculates clock rate, given tempo in BPM and speed in ticks per row/unit.
+cinch tickspeed <tempo> <clock>
+  Calculates tick speed, given tempo in BPM and clock rate in Hz.
   HELP
 
   def on_amkspeed(m, tempo)
@@ -33,10 +35,23 @@ cinch clockspeed <tempo>
     if tempo.nil? || speed.nil?
       m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
     elsif (tempo < 0) || (speed < 0)
-      m.reply("Sorry, #{m.user.nick}, you can't get any slower than 0.")
+      m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
     else
       clockspeed = tempo * speed / 15.0
       m.reply("The clock speed is #{clockspeed} Hz.")
+    end
+  end
+
+  def on_tickspeed(m, tempo, clock)
+    tempo = Float(tempo) rescue nil
+    clock = Float(clock) rescue nil
+    if tempo.nil? || clock.nil?
+      m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
+    elsif (tempo < 0) || (clock < 0)
+      m.reply("Sorry, #{m.user.nick}, you can't make time go backwards.")
+    else
+      tickspeed = tempo * clock / 15.0
+      m.reply("The tick speed is #{tickspeed}.")
     end
   end
 end
