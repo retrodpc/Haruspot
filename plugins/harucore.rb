@@ -56,7 +56,7 @@ class Cinch::Harucore
     end
   end
   
-  listen_to :channel, :method => :on_channel
+  listen_to :message, :method => :on_message
 
   match /ping/, :method => :on_ping
   match /violin/, :method => :on_violin
@@ -87,16 +87,18 @@ class Cinch::Harucore
     end
   end
 
-  def on_channel(m)
-    if m.message =~ /^ok/i
-      m.reply "Oh, okay."
-    elsif m.message =~ /case in point/i
-      m.reply "point in case"
-    elsif m.message =~ /noticable/i
-      m.reply "notiwire >:C"
-    elsif m.message =~ /staph/i
-      m.reply "ylcoccus"
-    end
+  def on_message(m)
+    if is_shiptoast? m
+      if m.message =~ /^ok/i
+        m.reply "Oh, okay."
+      elsif m.message =~ /case in point/i
+        m.reply "point in case"
+      elsif m.message =~ /noticable/i
+        m.reply "notiwire >:C"
+      elsif m.message =~ /staph/i
+        m.reply "ylcoccus"
+      end
+    else
   end
 
 end
