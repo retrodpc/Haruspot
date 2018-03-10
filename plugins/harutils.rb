@@ -6,11 +6,11 @@ class Cinch::Harutils
   match /tickspeed ?(.*) (.*)/, :method => :on_tickspeed, :react_on => :channel
 
   set :help, <<-HELP
-prefix amkspeed <tempo>
+prefixamkspeed <tempo>
   Calculates AMK speed value based on tempo in BPM.
-prefix clockspeed <tempo> <speed>
+prefixclockspeed <tempo> <speed>
   Calculates clock rate, given tempo in BPM and speed in ticks per row/unit.
-prefix tickspeed <tempo> <clock>
+prefixtickspeed <tempo> <clock>
   Calculates tick speed, given tempo in BPM and clock rate in Hz.
   HELP
 
