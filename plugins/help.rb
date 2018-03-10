@@ -17,15 +17,15 @@
 # None.
 #
 # == Configuration
-# Add the following to your bot’s configure.do stanza:
+# Add the following to your bot's configure.do stanza:
 #
 #   config.plugins.options[Cinch::Help] = {
-#     :intro => "%s at your service."
+#     intro: "%s at your service."
 #   }
 #
 # [intro]
 #   First message posted when the user issues 'help' to the bot
-#   without any parameters. %s is replaced with Cinch’s current
+#   without any parameters. %s is replaced with Cinch's current
 #   nickname.
 #
 # == Writing help messages
@@ -53,7 +53,7 @@
 # resulting in the help messages being cut. Instead, provide a web link or
 # something similar for full-blown descriptions.
 #
-# The command itself may be in any form you want (as long as it’s a single
+# The command itself may be in any form you want (as long as it's a single
 # line), but I recommend the following conventions so users know how to
 # talk to the bot:
 #
@@ -76,11 +76,11 @@
 # the actual nickname of your bot.
 #
 # == Author
-# Marvin Gülker (Quintus), retrodpc (Ivysalt)
+# Marvin Guelker (Quintus), retrodpc (Ivysalt)
 #
 # == License
 # A help plugin for Cinch.
-# Copyright © 2012 Marvin Gülker, © 2018 Ivysalt
+# Copyright (c) 2012 Marvin Guelker, (c) 2018 Ivysalt
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -109,20 +109,20 @@ class Cinch::Help
 [/msg] cinch help <plugin>
   List all commands available in a plugin.
 [/msg] cinch help search <query>
-  Search all plugin’s commands and list all commands containing
+  Search all plugin's commands and list all commands containing
   <query>.
   EOF
 
   def execute(msg, query)
     query = query.strip.downcase
-    response = ""
+    response = ''
 
     # Act depending on the subcommand.
     if query.empty?
-      response << @intro_message.strip << "\n"
-      response << "Available plugins:\n"
-      response << bot.config.plugins.plugins.map{|plugin| format_plugin_name(plugin)}.join(", ")
-      response << "\n'help <plugin>' for help on a specific plugin."
+      response << @intro_message.strip << '\n'
+      response << 'Available plugins:\n'
+      response << bot.config.plugins.plugins.map{|plugin| format_plugin_name(plugin)}.join(', ')
+      response << '\n"help <plugin>" for help on a specific plugin.'
 
     # Help for a specific plugin
     elsif plugin = @help.keys.find{|plugin| format_plugin_name(plugin) == query}
@@ -147,7 +147,7 @@ class Cinch::Help
       response << "Sorry, I cannot find '#{query}'."
     end
 
-    response << "Sorry, nothing found." if response.empty?
+    response << 'Sorry, nothing found.' if response.empty?
     msg.user.notice(response)
   end
 
@@ -157,9 +157,9 @@ class Cinch::Help
   #
   #   {Plugin => {"command" => "explanation"}}
   #
-  # where +Plugin+ is the plugin’s class object. It also parses configuration
+  # where +Plugin+ is the plugin's class object. It also parses configuration
   # options.
-  def on_connect(msg)
+  def on_connect(_msg)
     @help = {}
 
     if config[:intro]
@@ -169,9 +169,9 @@ class Cinch::Help
     end
 
     bot.config.plugins.plugins.each do |plugin|
-      @help[plugin] = Hash.new{|h, k| h[k] = ""}
+      @help[plugin] = Hash.new {|h, k| h[k] = ''}
       next unless plugin.help # Some plugins don't provide help
-      current_command = "<unparsable content>" # For not properly formatted help strings
+      current_command = '<unparsable content>' # For not properly formatted help strings
 
       plugin.help.lines.each do |line|
         if line =~ /^\s+/
@@ -187,11 +187,11 @@ class Cinch::Help
 
   # Format the help for a single command in a nice, unicode mannor.
   def format_command(command, explanation, plugin)
-    result = ""
+    result = ''
 
-    result << "┌─ " << command << " ─── Plugin: " << format_plugin_name(plugin) << " ─" << "\n"
-    result << explanation.lines.map(&:strip).join(" ").chars.each_slice(80).map(&:join).join("\n")
-    result << "\n" << "└ ─ ─ ─ ─ ─ ─ ─ ─\n"
+    result << '┌─ ' << command << ' ─── Plugin: ' << format_plugin_name(plugin) << ' ─' << '\n'
+    result << explanation.lines.map(&:strip).join(' ').chars.each_slice(80).map(&:join).join('\n')
+    result << '\n' << '└ ─ ─ ─ ─ ─ ─ ─ ─\n'
 
     result
   end
@@ -200,7 +200,7 @@ class Cinch::Help
   # of the namespace, so it can be displayed in a user-friendly
   # way.
   def format_plugin_name(plugin)
-    plugin.to_s.split("::").last.downcase
+    plugin.to_s.split('::').last.downcase
   end
 
 end

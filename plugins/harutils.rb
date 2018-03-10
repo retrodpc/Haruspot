@@ -17,7 +17,7 @@
 # retrodpc (Ivysalt)
 #
 # == License
-# Copyright © 2018 Ivysalt
+# Copyright (c) 2018 Ivysalt
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -49,45 +49,45 @@ class Cinch::Harutils
   Calculates tick speed, given tempo in BPM and clock rate in Hz.
   HELP
 
-  def on_amkspeed(m, tempo)
+  def on_amkspeed(msg, tempo)
     tempo = Float(tempo) rescue nil
     if tempo.nil?
-      m.safe_reply "Usage: #{bot.config.plugins.prefix}amkspeed <tempo>"
+      msg.safe_reply "Usage: #{bot.config.plugins.prefix}amkspeed <tempo>"
     elsif tempo < 0
-      m.safe_reply "Sorry, #{m.user.nick}, you can't have a tempo less than 0."
+      msg.safe_reply "Sorry, #{msg.user.nick}, you can't have a tempo less than 0."
     else
       amkspeed = tempo * 256.0 / 625.0
       if (amkspeed.round) == amkspeed
-        m.safe_reply "Given tempo #{tempo}, the AMK speed is %d." % [amkspeed]
+        msg.safe_reply "Given tempo #{tempo}, the AMK speed is %d." % [amkspeed]
       else
-        m.safe_reply "The AMK speed is about %d. The yielded tempo would be %.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0]
+        msg.safe_reply "The AMK speed is about %d. The yielded tempo would be %.3f BPM." % [amkspeed, amkspeed.round * 625.0 / 256.0]
       end
     end
   end
 
-  def on_clockspeed(m, tempo, speed)
+  def on_clockspeed(msg, tempo, speed)
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
     if tempo.nil? || speed.nil?
-      m.safe_reply "Usage: #{bot.config.plugins.prefix}clockspeed <tempo> <speed>"
+      msg.safe_reply "Usage: #{bot.config.plugins.prefix}clockspeed <tempo> <speed>"
     elsif (tempo < 0) || (speed < 0)
-      m.safe_reply "Sorry, #{m.user.nick}, you can't make time go backwards."
+      msg.safe_reply "Sorry, #{msg.user.nick}, you can't make time go backwards."
     else
       clockspeed = tempo * speed / 15.0
-      m.safe_reply "The clock speed is #{clockspeed} Hz."
+      msg.safe_reply "The clock speed is #{clockspeed} Hz."
     end
   end
 
-  def on_tickspeed(m, tempo, clock)
+  def on_tickspeed(msg, tempo, clock)
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
     if tempo.nil? || clock.nil?
-      m.safe_reply "Usage: #{bot.config.plugins.prefix}tickspeed <tempo> <clock>"
+      msg.safe_reply "Usage: #{bot.config.plugins.prefix}tickspeed <tempo> <clock>"
     elsif (tempo < 0) || (clock < 0)
-      m.safe_reply "Sorry, #{m.user.nick}, you can't make time go backwards."
+      msg.safe_reply "Sorry, #{msg.user.nick}, you can't make time go backwards."
     else
       tickspeed = tempo * clock / 15.0
-      m.safe_reply "The tick speed is #{tickspeed}."
+      msg.safe_reply "The tick speed is #{tickspeed}."
     end
   end
 end

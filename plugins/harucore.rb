@@ -7,13 +7,13 @@
 # (to be added later)
 #
 # == Dependencies
-# None.
+# JSON: to load the copypasta data.
 #
 # == Configuration
-# Add the following to your bot’s configure.do stanza:
+# Add the following to your bot's configure.do stanza:
 #
 #   config.plugins.options[Cinch::Harucore] = {
-#     :shiptoast => ["#channel"]
+#     shiptoast: ['#channel']
 #   }
 #
 # [channel]
@@ -23,7 +23,7 @@
 # retrodpc (Ivysalt)
 #
 # == License
-# Copyright © 2018 Ivysalt
+# Copyright (c) 2018 Ivysalt
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -38,65 +38,78 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Funpost plugin for Cinch.
+require 'json'
 
+# Funpost plugin for Cinch.
 class Cinch::Harucore
   include Cinch::Plugin
 
-  def is_shiptoast?(m)
+  #data = JSON.parse(File.read('../data/copypasta.json'))
+
+  # Checks if the given message is in a context approprate for shiptoasting.
+  def shiptoast?(msg)
     if config[:shiptoast]
       shiptoast = config[:shiptoast]
     else
-      shiptoast = ["#worms_badposting"]
+      shiptoast = ['#worms_badposting']
     end
-    if !m.channel? || (shiptoast.include? m.channel.name)
-      return true
-    else
-      return false
-    end
+    return !msg.channel? || (shiptoast.include? msg.channel.name)
   end
+
+  # Checks if the given message is not in a context approprate for shiptoasting.
+  def not_shiptoast?(msg)
+    if config[:shiptoast]
+      shiptoast = config[:shiptoast]
+    else
+      shiptoast = ['#worms_badposting']
+    end
+    return !(shiptoast.include? msg.channel.name)
+  end
+
+  #def zalgo_gen(text)
+  #end
   
   listen_to :message, :method => :on_message
 
-  match /ping/, :method => :on_ping
-  match /violin/, :method => :on_violin
-  match /aaa/, :method => :on_aaa
+  match(/ping/, :method => :on_ping)
+  match(/violin/, :method => :on_violin)
+  match(/aaa/, :method => :on_aaa)
 
   set :help, <<-HELP
 [prefix]ping
-  Replies with "Pong!"
+  Replies with 'Pong!'
 [prefix]violin
   Ever wondered what a violin is? Well now find out!
 [prefix]aaa
   For when you just can't contain the pain within.
   HELP
 
-  def on_ping(m)
-    m.safe_reply "Pong!"
+  def on_ping(msg)
+    msg.safe_reply 'Pong!'
   end
   
-  def on_violin(m)
-    if is_shiptoast? m
-      m.safe_reply "The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years"
+  def on_violin(msg)
+    if shiptoast? m
+      msg.safe_reply 'The violin (violin) is a kind of a super clean orchestra played to ring carry instruments. It is widely spread all over the world, is the modern orchestra string of the main instrument. In the music it plays very important position, is the pillar of the modern symphony orchestra, but also has the difficult playing skills solo instrument.The emergence of modern violin has been 300 years'
     end
   end
 
-  def on_aaa(m)
-    if is_shiptoast? m
-      m.safe_reply "https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png"
+  def on_aaa(msg)
+    if shiptoast? m
+      msg.safe_reply 'https://cdn.discordapp.com/attachments/190191670304833536/201368263203094528/10a.png'
     end
   end
 
-  def on_message(m)
-    if is_shiptoast? m
-      if m.message =~ /^ok/i
-        m.safe_reply "Oh, okay."
-      elsif m.message =~ /case in point/i
-        m.safe_reply "point in case"
-      elsif m.message =~ /noticable/i
-        m.safe_reply "notiwire >:C"
-      elsif m.message =~ /staph/i
-        m.safe_reply "ylcoccus"
+  def on_message(msg)
+    if shiptoast? m
+      if msg.message =~ /^ok/i
+        msg.safe_reply 'Oh, okay.'
+      elsif msg.message =~ /case in point/i
+        msg.safe_reply 'point in case'
+      elsif msg.message =~ /noticable/i
+        msg.safe_reply 'notiwire >:C'
+      elsif msg.message =~ /staph/i
+        msg.safe_reply 'ylcoccus'
       end
     end
   end
