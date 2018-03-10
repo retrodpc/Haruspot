@@ -1,7 +1,7 @@
 class Cinch::Harutils
   include Cinch::Plugin
 
-  match /amkspeed (.*)/, :method => :on_amkspeed, :react_on => :channel
+  match /amkspeed (\d+)/, :method => :on_amkspeed, :react_on => :channel
 
   set :help, <<-HELP
 cinch amkspeed <tempo>
@@ -12,6 +12,8 @@ cinch amkspeed <tempo>
     tempo = Float(tempo) rescue nil
     if tempo.nil?
       m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
+    elsif tempo < 0
+      m.reply("Sorry, #{m.user.nick}, you can't have a tempo less than 0.")
     else
       amkspeed = tempo * 256.0 / 625.0
       if (amkspeed.round) == amkspeed
