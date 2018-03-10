@@ -49,7 +49,11 @@ class Cinch::Harucore
     else
       shiptoast = ["#worms_badposting"]
     end
-    return shiptoast.include? m.channel.name
+    if !m.channel? || (shiptoast.include? m.channel.name)
+      return true
+    else
+      return false
+    end
   end
   
   listen_to :channel, :method => :on_channel
