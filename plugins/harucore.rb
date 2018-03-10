@@ -48,14 +48,14 @@ class Cinch::Harucore
 
   # Checks if the given message is in a context approprate for shiptoasting.
   def shiptoast?(msg)
-    shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
-    return (!msg.channel? || (shiptoast.include? msg.channel.name))
+    shiptoast = config[:shiptoast] ? config[:shiptoast] : ['#worms_badposting']
+    (!msg.channel? || (shiptoast.include? msg.channel.name))
   end
 
   # Checks if the given message is not in a context approprate for shiptoasting.
   def not_shiptoast?(msg)
-    shiptoast = config[:shiptoast] ? config[:shiptoast] : ["#worms_badposting"]
-    return !(shiptoast.include? msg.channel.name)
+    shiptoast = config[:shiptoast] ? config[:shiptoast] : ['#worms_badposting']
+    !(shiptoast.include? msg.channel.name)
   end
 
   # def zalgo_gen(text)
@@ -81,7 +81,7 @@ class Cinch::Harucore
   end
   
   def on_violin(msg)
-    return if !shiptoast?(msg)
+    return unless shiptoast?(msg)
     msg.safe_reply('The violin (violin) is a kind of a super clean orchestra'\
       ' played to ring carry instruments. It is widely spread all over the '\
       'world, is the modern orchestra string of the main instrument. In the '\
@@ -91,15 +91,17 @@ class Cinch::Harucore
   end
 
   def on_aaa(msg)
-    return if !shiptoast?(msg)
+    return unless shiptoast?(msg)
     msg.safe_reply('https://cdn.discordapp.com/attachments'\
       '/190191670304833536/201368263203094528/10a.png')
   end
 
   def on_message(msg)
-    return if !shiptoast?(msg)
+    return unless shiptoast?(msg)
     if msg.message =~ /^ok/i
       msg.safe_reply 'Oh, okay.'
+    if msg.message =~ /^オー?ケー?/i
+      msg.safe_reply 'wtf ウィーアブーだよ？？？'
     elsif msg.message =~ /case in point/i
       msg.safe_reply 'point in case'
     elsif msg.message =~ /noticable/i

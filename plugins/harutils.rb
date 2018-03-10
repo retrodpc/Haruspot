@@ -58,7 +58,7 @@ class Cinch::Harutils
         'I won\'t let you go slower than me.')
     else
       amkspeed = tempo * 256.0 / 625.0
-      if (amkspeed.round) == amkspeed
+      if amkspeed.round == amkspeed
         msg.safe_reply("Given tempo #{tempo}, the AMK speed is %<speed>d." %
             [amkspeed])
       else
@@ -74,10 +74,10 @@ class Cinch::Harutils
     speed = Float(speed) rescue nil
     if tempo.nil? || speed.nil?
       msg.safe_reply("Usage: #{bot.config.plugins.prefix}clockspeed"\
-        "<tempo> <speed>")
+        '<tempo> <speed>')
     elsif (tempo < 0) || (speed < 0)
       msg.safe_reply("Sorry, #{msg.user.nick}, "\
-        "you can't make time go backwards.")
+        'you can\'t make time go backwards.')
     else
       clockspeed = tempo * speed / 15.0
       msg.safe_reply("The clock speed is #{clockspeed} Hz.")
@@ -89,10 +89,10 @@ class Cinch::Harutils
     clock = Float(clock) rescue nil
     if tempo.nil? || clock.nil?
       msg.safe_reply("Usage: #{bot.config.plugins.prefix}tickspeed"\
-        "<tempo> <clock>")
+        '<tempo> <clock>')
     elsif (tempo < 0) || (clock < 0)
       msg.safe_reply("Sorry, #{msg.user.nick}, "\
-        "you can't make time go backwards.")
+        'you can\'t make time go backwards.')
     else
       tickspeed = tempo * clock / 15.0
       msg.safe_reply("The tick speed is #{tickspeed}.")
