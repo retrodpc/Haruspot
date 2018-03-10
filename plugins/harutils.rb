@@ -2,10 +2,13 @@ class Cinch::Harutils
   include Cinch::Plugin
 
   match /amkspeed (\d+)/, :method => :on_amkspeed, :react_on => :channel
+  match /clockspeed (\d+) (\d+)/, :method => :on_clockspeed, :react_on => :channel
 
   set :help, <<-HELP
 cinch amkspeed <tempo>
-  Calculates AMK speed value based on <tempo>.
+  Calculates AMK speed value based on tempo in BPM.
+cinch clockspeed <tempo>
+  Calculates clock rate, given tempo in BPM and speed in ticks per row/unit.
   HELP
 
   def on_amkspeed(m, tempo)
@@ -24,4 +27,16 @@ cinch amkspeed <tempo>
     end
   end
 
+  def on_clockspeed(m, tempo, speed)
+    tempo = Float(tempo) rescue nil
+    speed = Float(speed) rescue nil
+    if tempo.nil? || speed.nil?
+      m.reply("Sorry, #{m.user.nick}. That's not a valid input.")
+    elsif (tempo < 0) || (speed < 0)
+      m.reply("Sorry, #{m.user.nick}, you can't get any slower than 0.")
+    else
+      clockspeed = tempo * speed / 15.0
+      m.reply("The clock speed is #{clockspeed} Hz.")
+    end
+  end
 end
