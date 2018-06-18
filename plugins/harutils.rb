@@ -60,7 +60,7 @@ class Cinch::Harutils
       amkspeed = tempo * 256.0 / 625.0
       if amkspeed.round == amkspeed
         msg.safe_reply("Given tempo #{tempo}, the AMK speed is %<speed>d." %
-            [amkspeed])
+            amkspeed)
       else
         msg.safe_reply("The AMK speed is about %<speed>d. The yielded tempo "\
           "would be %.3<tempo>f BPM." % [amkspeed,
