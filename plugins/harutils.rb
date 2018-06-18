@@ -159,11 +159,11 @@ class Cinch::Harutils
       raise "Invalid samplerate."
     end
 
-    a = 2**(1/12)		# a = 12-tones in an octave
+    a = 2.0**(1.0/12.0)		# a = 12-tones in an octave
     fn = rate * (a**n)		# Calculates the freq of the note
 
     delta = fn / (31250/255)		# 255 is FF in hex
-    delta = Integer(delta.round)	# Rounds to 0 decimal pts
+    delta = Integer(delta.round(0))	# Rounds to 0 decimal pts
     return dec_to_hex(delta)		# Converts delta from dec to hex
   end
 
