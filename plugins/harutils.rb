@@ -137,7 +137,7 @@ class Cinch::Harutils
         '#{bot.config.plugins.prefix}deltapcm '\
         '<semitone_change> <samplerate>')
     else
-      if converted_hex.length == 1:
+      if converted_hex.length == 1
         converted_hex = "0" + converted_hex
       end
       msg.safe_reply("Your delta command is: ``20%s``" % [converted_hex])
