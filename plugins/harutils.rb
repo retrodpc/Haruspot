@@ -112,7 +112,7 @@ class Cinch::Harutils
     semitone_change = Float(semitone_change) rescue nil
     rate = Float(rate) rescue nil
 
-    if tempo.nil? || clock.nil?
+    if semitone_change.nil? || rate.nil?
       msg.safe_reply("Usage: #{bot.config.plugins.prefix}"\
         'deltapcm <semitone_change> <samplerate>')
       return
