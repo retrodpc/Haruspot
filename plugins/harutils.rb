@@ -44,7 +44,7 @@ class Cinch::Harutils
   match(/tickspeed ?(.*) (.*)/, method: :on_tickspeed)
   match(/tickspeed$/, method: :on_tickspeed)
   match(/deltapcm ?(.*) (.*)/, method: :on_deltapcm)
-  match(/deltapcm/, method: :on_deltapcm)
+  match(/deltapcm$/, method: :on_deltapcm)
 
   set :help, <<-HELP
 [prefix]amkspeed <tempo>
@@ -129,7 +129,7 @@ class Cinch::Harutils
         'deltapcm <semitone_change> <samplerate>')
     end
 
-    if converted_hex == "" # Check if hex value is smaller than 00
+    if converted_hex == "" # Check if hex value is smaller than 00  
       msg.safe_reply("Error: Underflow ! Usage: "\
         '#{bot.config.plugins.prefix}deltapcm '\
         '<semitone_change> <samplerate>')
@@ -163,7 +163,7 @@ class Cinch::Harutils
     fn = rate * (a**n)		# Calculates the freq of the note
 
     delta = fn / (31250/255)		# 255 is FF in hex
-    delta = Integer(delta.round(0))	# Rounds to 0 decimal pts
+    delta = Integer(delta.round)	# Rounds to 0 decimal pts
     return dec_to_hex(delta)		# Converts delta from dec to hex
   end
 
