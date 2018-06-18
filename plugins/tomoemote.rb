@@ -41,6 +41,7 @@ class Cinch::Tomoemote
   match(/sad/, method: :on_sad)
   match(/tableflip/, method: :on_tableflip)
   match(/dead/, method: :on_dead)
+  match(/derp/, method: :on_derp)
   match(/mad/, method: :on_mad)
   match(/fade/, method: :on_fade)
   match(/oh/, method: :on_oh)
@@ -67,38 +68,10 @@ class Cinch::Tomoemote
   match(/coffee/, method: :on_coffee)
 
   set :help, <<-HELP
-  [prefix]kfarathumbs
-  [prefix]kfarathumbs2
-  [prefix]kfarafinger
-  [prefix]denko
-  [prefix]abearalien
-  [prefix]denkofinger
-  [prefix]sad
-  [prefix]tableflip
-  [prefix]dead
-  [prefix]mad
-  [prefix]fade
-  [prefix]oh
-  [prefix]kfo
-  [prefix]cat1
-  [prefix]cat2
-  [prefix]cat3
-  [prefix]cat4
-  [prefix]oh2
-  [prefix]devil
-  [prefix]kfaradevil
-  [prefix]kfcat
-  [prefix]shrug
-  [prefix]pedo
-  [prefix]gender
-  [prefix]doxic
-  [prefix]whatisthis
-  [prefix]fuchs
-  [prefix]shit
-  [prefix]that
-  [prefix]fuck
-  [prefix]gift
-  [prefix]coffee
+  List of commands: kfarathumbs, kfarathumbs2, kfarafinger, denko,
+  abearalien, denkofinger, sad, tableflip, dead, mad, fade, oh, kfo,
+  cat1, cat2, cat3, cat4, oh2, devil, kfaradevil, kfcat, shrug, pedo,
+  gender, doxic, whatisthis, fuchs, shit, that, fuck, gift, coffee
   HELP
 
   def on_kfarathumbs(msg)
