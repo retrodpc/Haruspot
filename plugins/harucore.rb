@@ -93,7 +93,6 @@ class Cinch::Harucore
   end
 
   def on_aaa(msg)
-    return unless shiptoast?(msg)
     msg.safe_reply('https://cdn.discordapp.com/attachments'\
       '/190191670304833536/201368263203094528/10a.png')
   end
