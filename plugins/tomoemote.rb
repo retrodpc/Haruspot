@@ -65,18 +65,40 @@ class Cinch::Tomoemote
   match(/fuck/, method: :on_fuck)
   match(/gift/, method: :on_gift)
   match(/coffee/, method: :on_coffee)
-  match(//, method: :on_)
-  match(//, method: :on_)
 
   set :help, <<-HELP
-[prefix]ping
-  Replies with 'Pong!'
-[prefix]violin
-  Ever wondered what a violin is? Well now find out!
-[prefix]aaa
-  For when you just can't contain the pain within.
-[prefix]angry
-  Extreme expresion of anger
+  [prefix]kfarathumbs
+  [prefix]kfarathumbs2
+  [prefix]kfarafinger
+  [prefix]denko
+  [prefix]abearalien
+  [prefix]denkofinger
+  [prefix]sad
+  [prefix]tableflip
+  [prefix]dead
+  [prefix]mad
+  [prefix]fade
+  [prefix]oh
+  [prefix]kfo
+  [prefix]cat1
+  [prefix]cat2
+  [prefix]cat3
+  [prefix]cat4
+  [prefix]oh2
+  [prefix]devil
+  [prefix]kfaradevil
+  [prefix]kfcat
+  [prefix]shrug
+  [prefix]pedo
+  [prefix]gender
+  [prefix]doxic
+  [prefix]whatisthis
+  [prefix]fuchs
+  [prefix]shit
+  [prefix]that
+  [prefix]fuck
+  [prefix]gift
+  [prefix]coffee
   HELP
 
   def on_kfarathumbs(msg)
