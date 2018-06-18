@@ -98,7 +98,7 @@ class Cinch::Harucore
   end
 
   def on_angry(msg)
-    msg.safe_reply("\x1D\x1F\x02>:C\x0F")
+    msg.reply("\x1D\x1F\x02>:C\x0F")
   end
 
   def on_this(msg, length)
