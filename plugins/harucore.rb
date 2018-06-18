@@ -98,7 +98,7 @@ class Cinch::Harucore
       '/190191670304833536/201368263203094528/10a.png')
   end
 
-  def on_angry(self)
+  def on_angry(msg)
     msg.safe_reply("**___~~>:C~~___**")
 
   def on_message(msg)
