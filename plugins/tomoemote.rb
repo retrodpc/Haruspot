@@ -221,6 +221,7 @@ class Cinch::Tomoemote
   def on_shit(msg)
     msg.reply("http://giraffopia.files.wordpress.com/2010/10/"\
       "dog-pooping-on-president-clinton.jpg")
+  end
 
   def on_that(msg)
     msg.reply("https://www.youtube.com/watch?v=wCDIYvFmgW8")
