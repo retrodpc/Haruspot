@@ -115,9 +115,9 @@ class Cinch::Harucore
   def on_message(msg)
     return unless shiptoast?(msg)
     if msg.message =~ /^ok/i
-      msg.safe_reply 'Oh, okay.'
+      msg.safe_reply('Oh, okay.')
     elsif msg.message =~ /^オー?ケー?/i
-      msg.safe_reply 'wtf ウィーアブーだね？？？'
+      msg.safe_reply('wtf ウィーアブーだね？？？')
     end
   end
 
