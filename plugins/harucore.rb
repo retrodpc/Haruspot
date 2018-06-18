@@ -74,6 +74,8 @@ class Cinch::Harucore
   Ever wondered what a violin is? Well now find out!
 [prefix]aaa
   For when you just can't contain the pain within.
+[prefix]angry
+  Extreme expresion of anger
   HELP
 
   def on_ping(msg)
@@ -96,18 +98,15 @@ class Cinch::Harucore
       '/190191670304833536/201368263203094528/10a.png')
   end
 
+  def on_angry(self)
+    msg.safe_reply("**___~~>:C~~___**")
+
   def on_message(msg)
     return unless shiptoast?(msg)
     if msg.message =~ /^ok/i
       msg.safe_reply 'Oh, okay.'
     elsif msg.message =~ /^オー?ケー?/i
-      msg.safe_reply 'wtf ウィーアブーだよ？？？'
-    elsif msg.message =~ /case in point/i
-      msg.safe_reply 'point in case'
-    elsif msg.message =~ /noticable/i
-      msg.safe_reply 'notiwire >:C'
-    elsif msg.message =~ /staph/i
-      msg.safe_reply 'ylcoccus'
+      msg.safe_reply 'wtf ウィーアブーだね？？？'
     end
   end
 
