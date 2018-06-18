@@ -100,6 +100,7 @@ class Cinch::Harucore
 
   def on_angry(msg)
     msg.safe_reply("**___~~>:C~~___**")
+  end
 
   def on_message(msg)
     return unless shiptoast?(msg)
