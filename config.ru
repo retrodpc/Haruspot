@@ -2,6 +2,7 @@ require 'cinch'
 require_relative 'plugins/harucore'
 require_relative 'plugins/harutils'
 require_relative 'plugins/help'
+require_relative 'plugins/tomoemote'
 
 bot = Cinch::Bot.new do
   configure do |c|
