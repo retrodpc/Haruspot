@@ -109,7 +109,7 @@ class Cinch::Harucore
 
   def on_wow(msg, length)
     wow = wow_gen(length)
-    msg.safe_reply(wow)
+    msg.reply(wow)
   end
 
   def on_message(msg)
