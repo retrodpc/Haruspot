@@ -34,11 +34,13 @@
 
 # Calculation utilities plugin for Cinch.
 class Cinch::Harutils
+
   include Cinch::Plugin
 
   match(/amkspeed ?(.*)/, method: :on_amkspeed)
   match(/clockspeed ?(.*) (.*)/, method: :on_clockspeed)
   match(/tickspeed ?(.*) (.*)/, method: :on_tickspeed)
+  #match(/deltapcm ?(.*) (.*)/, method: :on_deltapcm)
 
   set :help, <<-HELP
 [prefix]amkspeed <tempo>
@@ -94,7 +96,7 @@ class Cinch::Harutils
       msg.safe_reply("Sorry, #{msg.user.nick}, "\
         'you can\'t make time go backwards.')
     else
-      tickspeed = tempo * clock / 15.0
+      tickspeed = 15 * clock / tempo
       msg.safe_reply("The tick speed is #{tickspeed}.")
     end
   end
