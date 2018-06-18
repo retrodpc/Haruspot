@@ -69,7 +69,7 @@ class Cinch::Tomoemote
 
   set :help, <<-HELP
   List of commands: kfarathumbs, kfarathumbs2, kfarafinger, denko,
-  abearalien, denkofinger, sad, tableflip, dead, mad, fade, oh, kfo,
+  abearalien, finger, sad, tableflip, dead, mad, fade, oh, kfo,
   cat1, cat2, cat3, cat4, oh2, devil, kfaradevil, kfcat, shrug, pedo,
   gender, doxic, whatisthis, fuchs, shit, that, fuck, gift, coffee
   HELP
