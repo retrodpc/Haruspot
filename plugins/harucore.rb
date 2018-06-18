@@ -57,15 +57,15 @@ class Cinch::Harucore
     shiptoast = config[:shiptoast] ? config[:shiptoast] : ['#worms_badposting']
     !(shiptoast.include? msg.channel.name)
   end
-
-  # def zalgo_gen(text)
-  # end
   
   listen_to :message, method: :on_message
 
   match(/ping/, method: :on_ping)
   match(/violin/, method: :on_violin)
   match(/aaa/, method: :on_aaa)
+  match(/angry/, method: :on_angry)
+  match(/this ?(.*)/, method: :on_this)
+  match(/wow ?(.*)/, method: :on_wow)
 
   set :help, <<-HELP
 [prefix]ping
@@ -99,7 +99,17 @@ class Cinch::Harucore
   end
 
   def on_angry(msg)
-    msg.safe_reply("**___~~>:C~~___**")
+    msg.safe_reply("\x1D\x1F\x02>:C\x0F")
+  end
+
+  def on_this(msg, length)
+    this = this_gen(length)
+    msg.safe_reply(this)
+  end
+
+  def on_wow(msg, length)
+    wow = wow_gen(length)
+    msg.safe_reply(wow)
   end
 
   def on_message(msg)
@@ -111,4 +121,57 @@ class Cinch::Harucore
     end
   end
 
+  # badposting generators below
+
+  # Generates a text penis at a given length
+  def this_gen(length = 20)
+    length = Integer(length) rescue nil
+    if length == nil
+      length = 20
+    end
+
+    if (length <= 420 && length >= 0)
+      this_thing = "8"
+      for i in 1..length
+        this_thing += "="
+      end
+      this_thing += "D"
+      return this_thing
+    elsif (length >= -420 && length < 0)
+      this_thing = "D"
+      for i in 1..(-length)
+        this_thing += "="
+      end
+      this_thing += "8"
+      return this_thing
+    else
+      return "Sorry bud, but my dick won't fit in here. \x1D: )"
+    end
+  end
+
+  # Generates a text wow at a given length
+  def wow_gen(length = 16)
+    length = Integer(length) rescue nil
+    if length == nil
+      length = 16
+    end
+
+    if (length <= 69 && length >= 0)
+      wow_thing = "\x02w"
+      for i in 1..length
+        wow_thing += "\x03%02do" % [i % 16]
+      end
+      wow_thing += "\x0F\x02w"
+      return wow_thing
+    elsif (length >= -69 && length < 0)
+      wow_thing = "\x02ʍ"
+      for i in 1..(-length)
+        wow_thing += "\x03%02do" % [i % 16]
+      end
+      wow_thing += "\x0F\x02ʍ"
+      return wow_thing
+    else
+      return "https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
+    end
+  end
 end
