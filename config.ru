@@ -11,7 +11,8 @@ bot = Cinch::Bot.new do
     c.user = 'Haruspot'
     c.realname = 'Haruspot: a Ruby bot based on Cinch'
     c.channels = ['#worms_badposting', '#savespam', '#worms', '#botb']
-    c.plugins.plugins = [Cinch::Harucore, Cinch::Harutils, Cinch::Help]
+    c.plugins.plugins = [Cinch::Harucore, Cinch::Harutils, Cinch::Help,
+      Cinch::Tomoemote]
     config.plugins.options[Cinch::Harucore] = {
       shiptoast: ['#worms_badposting', '#savespam']
     }
