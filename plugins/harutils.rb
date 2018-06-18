@@ -42,8 +42,9 @@ class Cinch::Harutils
   match(/clockspeed ?(.*) (.*)/, method: :on_clockspeed)
   match(/clockspeed$/, method: :on_clockspeed)
   match(/tickspeed ?(.*) (.*)/, method: :on_tickspeed)
-  match(/tickspeed$/, method: :on_clockspeed)
-  #match(/deltapcm ?(.*) (.*)/, method: :on_deltapcm)
+  match(/tickspeed$/, method: :on_tickspeed)
+  match(/deltapcm ?(.*) (.*)/, method: :on_deltapcm)
+  match(/deltapcm/, method: :on_deltapcm)
 
   set :help, <<-HELP
 [prefix]amkspeed <tempo>
@@ -54,7 +55,7 @@ class Cinch::Harutils
   Calculates tick speed, given tempo in BPM and clock rate in Hz.
   HELP
 
-  def on_amkspeed(msg, tempo)
+  def on_amkspeed(msg, tempo=nil)
     tempo = Float(tempo) rescue nil
 
     if tempo.nil?
@@ -75,7 +76,7 @@ class Cinch::Harutils
     end
   end
 
-  def on_clockspeed(msg, tempo, speed)
+  def on_clockspeed(msg, tempo=nil, speed=nil)
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
 
@@ -91,7 +92,7 @@ class Cinch::Harutils
     end
   end
 
-  def on_tickspeed(msg, tempo, clock)
+  def on_tickspeed(msg, tempo=nil, clock=nil)
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
 
@@ -107,7 +108,7 @@ class Cinch::Harutils
     end
   end
 
-  def on_deltapcm(msg, semitone_change, rate)
+  def on_deltapcm(msg, semitone_change=nil, rate=nil)
     semitone_change = Float(semitone_change) rescue nil
     rate = Float(rate) rescue nil
 
