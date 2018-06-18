@@ -9,16 +9,6 @@
 # == Dependencies
 # JSON: to load the copypasta data.
 #
-# == Configuration
-# Add the following to your bot's configure.do stanza:
-#
-#   config.plugins.options[Cinch::Harucore] = {
-#     shiptoast: ['#channel']
-#   }
-#
-# [channel]
-#   List of channels to listen for shiptoast commands.
-#
 # == Author
 # retrodpc (Ivysalt)
 #
@@ -38,10 +28,8 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require 'json'
-
 # Funpost plugin for Cinch.
-class Cinch::Harucore
+class Cinch::Tomoemote
   include Cinch::Plugin
 
   match(/kfarathumbs/, method: :on_kfarathumbs)
