@@ -53,6 +53,8 @@ class Cinch::Harutils
   Calculates clock rate, given tempo in BPM and speed in ticks per row/unit.
 [prefix]tickspeed <tempo> <clock>
   Calculates tick speed, given tempo in BPM and clock rate in Hz.
+[prefix]deltapcm <semitone_change> <samplerate>
+  Calculates Deflemask 20xx command, given semitone change and original samplerate.
   HELP
 
   def on_amkspeed(msg, tempo=nil)
