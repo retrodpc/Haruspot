@@ -37,9 +37,12 @@ class Cinch::Harutils
 
   include Cinch::Plugin
 
+  # command handlers
   match(/amkspeed ?(.*)/, method: :on_amkspeed)
   match(/clockspeed ?(.*) (.*)/, method: :on_clockspeed)
+  match(/clockspeed$/, method: :on_clockspeed)
   match(/tickspeed ?(.*) (.*)/, method: :on_tickspeed)
+  match(/tickspeed$/, method: :on_clockspeed)
   #match(/deltapcm ?(.*) (.*)/, method: :on_deltapcm)
 
   set :help, <<-HELP
@@ -53,6 +56,7 @@ class Cinch::Harutils
 
   def on_amkspeed(msg, tempo)
     tempo = Float(tempo) rescue nil
+
     if tempo.nil?
       msg.safe_reply("Usage: #{bot.config.plugins.prefix}amkspeed <tempo>")
     elsif tempo < 0
@@ -74,8 +78,9 @@ class Cinch::Harutils
   def on_clockspeed(msg, tempo, speed)
     tempo = Float(tempo) rescue nil
     speed = Float(speed) rescue nil
+
     if tempo.nil? || speed.nil?
-      msg.safe_reply("Usage: #{bot.config.plugins.prefix}clockspeed"\
+      msg.safe_reply("Usage: #{bot.config.plugins.prefix}clockspeed "\
         '<tempo> <speed>')
     elsif (tempo < 0) || (speed < 0)
       msg.safe_reply("Sorry, #{msg.user.nick}, "\
@@ -89,8 +94,9 @@ class Cinch::Harutils
   def on_tickspeed(msg, tempo, clock)
     tempo = Float(tempo) rescue nil
     clock = Float(clock) rescue nil
+
     if tempo.nil? || clock.nil?
-      msg.safe_reply("Usage: #{bot.config.plugins.prefix}tickspeed"\
+      msg.safe_reply("Usage: #{bot.config.plugins.prefix}tickspeed "\
         '<tempo> <clock>')
     elsif (tempo < 0) || (clock < 0)
       msg.safe_reply("Sorry, #{msg.user.nick}, "\
@@ -100,4 +106,87 @@ class Cinch::Harutils
       msg.safe_reply("The tick speed is #{tickspeed}.")
     end
   end
+
+  def on_deltapcm(msg, semitone_change, rate)
+    semitone_change = Float(semitone_change) rescue nil
+    rate = Float(rate) rescue nil
+
+    if tempo.nil? || clock.nil?
+      msg.safe_reply("Usage: #{bot.config.plugins.prefix}"\
+        'deltapcm <semitone_change> <samplerate>')
+      return
+    elsif (rate > 31250 ) || (rate <= 0)
+      msg.safe_reply("Sorry, #{msg.user.nick}, "\
+        'Sample rate needs to be between 1 Hz and 31250 Hz.')
+      return
+    end
+
+    begin
+      converted_hex = calc_delta_hex(semitone_change, rate)
+    rescue Exception => e
+      msg.safe_reply("Error: #{e} Usage: #{bot.config.plugins.prefix}"\
+        'deltapcm <semitone_change> <samplerate>')
+    end
+
+    if converted_hex == "" # Check if hex value is smaller than 00
+      msg.safe_reply("Error: Underflow ! Usage: "\
+        '#{bot.config.plugins.prefix}deltapcm '\
+        '<semitone_change> <samplerate>')
+    elsif converted_hex.length > 2 # Check hex value larger than FF
+      msg.safe_reply("Error: Overflow ! Usage: "\
+        '#{bot.config.plugins.prefix}deltapcm '\
+        '<semitone_change> <samplerate>')
+    else
+      if converted_hex.length == 1:
+        converted_hex = "0" + converted_hex
+      end
+      msg.safe_reply("Your delta command is: ``20%s``" % [converted_hex])
+    end
+  end
+
+  # Deflemask SegaPCM Delta command calculator.
+  #
+  # n = semitone difference, rate = the initial samplerate of your
+  # sample in Hz
+  def calc_delta_hex(n, rate)
+    n = Float(n) rescue nil
+    rate = Float(rate) rescue nil
+
+    if n.nil?
+      raise "Invalid semitone difference."
+    elsif rate.nil?
+      raise "Invalid samplerate."
+    end
+
+    a = 2**(1/12)		# a = 12-tones in an octave
+    fn = rate * (a**n)		# Calculates the freq of the note
+
+    delta = fn / (31250/255)		# 255 is FF in hex
+    delta = Integer(delta.round(0))	# Rounds to 0 decimal pts
+    return dec_to_hex(delta)		# Converts delta from dec to hex
+  end
+
+  # Converts decimal integer to hex string
+  def dec_to_hex(dec)
+    dec = Integer(dec) rescue nil
+
+    if dec.nil? # error handle
+      raise "This isn't an integer I recognise."
+    elsif dec == 0 # if dec is already 0 lmao
+      return "00"
+    end
+
+    hex_digits = "0123456789ABCDEF"
+    conversion = ''	# (Re-)initiate string
+    # dec referenced as division
+
+    while dec != 0
+      remainder = dec % 16
+      dec /= 16
+      conversion += hex_digits[remainder]
+    end
+
+    conversion.reverse!
+    return conversion
+    end
 end
